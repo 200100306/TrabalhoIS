@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package items;
+
+message Item {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message ItemRequest {
+  string id = 1;
+}
+
+message ItemResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message ItemList {
+  repeated ItemResponse items = 1;
+}
+
+message NewItem {
+  string name = 1;
+  string description = 2;
+}
+
+service ItemService {
+  rpc GetItems (google.protobuf.Empty) returns (ItemList);
+  rpc CreateItem (NewItem) returns (ItemResponse);
+  rpc DeleteItem (ItemRequest) returns (ItemResponse);
+}
